@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Animations;
@@ -12,6 +13,9 @@ public class Flying_MOV : MonoBehaviour
     [SerializeField] float side_thrust = 100f;
     [Range(10f, 100f)]
     [SerializeField] float main_thrust = 100f;
+    public enum Game_state { Main_Menu,Playing,Finish,Pause,collided}
+    public Game_state state = Game_state.Main_Menu;
+    public int Offset; 
 
     // Update is called once per frame
     private void Start()
@@ -26,7 +30,15 @@ public class Flying_MOV : MonoBehaviour
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
+        Poss_Restric();
 
+    }
+
+    private void Poss_Restric()
+    {
+        roc_rg.constraints = RigidbodyConstraints.FreezePositionZ;
+        roc_rg.constraints = RigidbodyConstraints.FreezeRotationX;
+        roc_rg.constraints = RigidbodyConstraints.FreezeRotationY;
     }
 
     private void Rotation()

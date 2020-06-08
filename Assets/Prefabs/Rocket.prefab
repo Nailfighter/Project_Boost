@@ -677,6 +677,7 @@ GameObject:
   - component: {fileID: -7099934624596913217}
   - component: {fileID: 814658469}
   - component: {fileID: -670496049569763263}
+  - component: {fileID: 1296522142}
   m_Layer: 0
   m_Name: Rocket
   m_TagString: Untagged
@@ -837,7 +838,20 @@ MonoBehaviour:
   roc_rg: {fileID: -7099934624596913217}
   audioSource: {fileID: 814658469}
   side_thrust: 170
-  main_thrust: 45
+  main_thrust: 30
+  state: 0
+--- !u!114 &1296522142
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8976281485270915972}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: daf38622a6375e246ab3a6ebdd391fcf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8976281485275523716
 GameObject:
   m_ObjectHideFlags: 0
