@@ -9,6 +9,8 @@ using UnityEngine.SceneManagement;
 public class Flying_MOV : MonoBehaviour
 {
     [SerializeField] Rigidbody roc_rg;
+    public bool level_up;
+    [Header("Game Levers")]
     [SerializeField] int waittime = 1;
     [Range(100f, 200f)]
     [SerializeField] float side_thrust = 100f;
@@ -25,24 +27,37 @@ public class Flying_MOV : MonoBehaviour
     [SerializeField] ParticleSystem expoltion;
     [SerializeField] ParticleSystem confetti;
 
-    public enum Game_state { Main_Menu, Playing, Finish, Pause, collided }
+    public enum Game_state { Main_Menu, Playing, Finish, Pause,Hit}
     public Game_state state = Game_state.Main_Menu;
 
-    // Update is called once per frame
     private void Start()
     {
-        roc_rg = GetComponent<Rigidbody>();
-
+        state = Game_state.Playing;
     }
-    void Update()
+
+    public void Update()
     {
-        Rotation();
-        Thrust();
-        Poss_Restric();
+        if (state == Game_state.Playing)
+        {
+            Input_For_Rotation();
+            Input_For_Thrusting();
+            Poss_Restric();
+
+            
+            
+        }
         if (Input.GetKey(KeyCode.R))
         {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            level_up = false;
+            Scene_Changer();
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
+        if (state != Game_state.Playing) 
+        {
+            Thrust_audiosource.Stop();
+            engine_thrust.Stop();
+        }
+
 
     }
 
@@ -51,9 +66,9 @@ public class Flying_MOV : MonoBehaviour
         roc_rg.constraints = RigidbodyConstraints.FreezePositionZ;
         roc_rg.constraints = RigidbodyConstraints.FreezeRotationX;
         roc_rg.constraints = RigidbodyConstraints.FreezeRotationY;
-    }
+    }//keep the rocket in right axis
 
-    private void Rotation()
+    private void Input_For_Rotation()
     {
         roc_rg.freezeRotation = true;
         if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
@@ -65,9 +80,9 @@ public class Flying_MOV : MonoBehaviour
             transform.Rotate(-Vector3.forward * side_thrust * Time.deltaTime);
         }
         roc_rg.freezeRotation = false;
-    }
+    }//input for rotation and variation in physic engine
 
-    private void Thrust()
+    private void Input_For_Thrusting()
     {
         if (Input.GetKey(KeyCode.Space))
         {
@@ -79,16 +94,15 @@ public class Flying_MOV : MonoBehaviour
             }
             
             
-        }
+        }//starts thrusting and audio
         else 
         {
             Thrust_audiosource.Stop();
-            print("rrrr");
-            engine_thrust.Stop();
+            engine_thrust.Stop(); 
         }
 
 
-    }
+    }//thrusing and audio
     public void OnCollisionEnter(UnityEngine.Collision collision)
     {
         if (Impact_audiosource.isPlaying) { return; }
@@ -104,24 +118,48 @@ public class Flying_MOV : MonoBehaviour
         }
         
 
-    }
+    }//collision
 
-    private void Death_Sequence()
+    public void Death_Sequence()
     {
-        Debug.Log("Hell");
-        GetComponent<Flying_MOV>().state = Flying_MOV.Game_state.collided;
+        state = Flying_MOV.Game_state.Hit;
         expoltion.Play();
         Impact_audiosource.Stop();
         Impact_audiosource.PlayOneShot(boom);
+        level_up = false;
+        Invoke("Scene_Changer", waittime);
     }
 
-    private void Fin_Sequence()
+    public void Fin_Sequence()
     {
-        GetComponent<Flying_MOV>().state = Flying_MOV.Game_state.collided;
-        print("playing");
-        confetti.Play();
-        Impact_audiosource.Stop();
-        Impact_audiosource.PlayOneShot(finish);
+        if (state==Game_state.Playing)
+        {
+            state = Flying_MOV.Game_state.Finish;
+            confetti.Play();
+            Impact_audiosource.Stop();
+            Impact_audiosource.PlayOneShot(finish);
+            level_up = true;
+            Invoke("Scene_Changer", waittime);
+        }
+        
     }
+    public void Scene_Changer()
+    {
+        if (1 == 1)
+        {
+            return;
+        }
+#pragma warning disable CS0162 // Unreachable code detected
+        if (level_up)
+#pragma warning restore CS0162 // Unreachable code detected
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        }
+        else
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        }
+    }
+
 }
 
