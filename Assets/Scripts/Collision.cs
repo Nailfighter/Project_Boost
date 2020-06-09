@@ -11,7 +11,7 @@ public class Collision : MonoBehaviour
     public AudioClip finish;
     private void OnCollisionEnter(UnityEngine.Collision collision)
     {
-        if (GetComponent<Flying_MOV>().state == Flying_MOV.Game_state.Hit)
+        if (GetComponent<Flying_MOV>().state == Flying_MOV.Game_state.collided)
         {
             return;
         }
@@ -19,14 +19,14 @@ public class Collision : MonoBehaviour
         {
             case "Hell":
                 Debug.Log("Hell");
-                GetComponent<Flying_MOV>().state = Flying_MOV.Game_state.Hit;
+                GetComponent<Flying_MOV>().state = Flying_MOV.Game_state.collided;
                 audioSource.Stop();
                 audioSource.PlayOneShot(boom);
                 Invoke("Return_Scene", waittime);
                 break;
             case "Pad":
                 Debug.Log("Safe");
-                GetComponent<Flying_MOV>().state = Flying_MOV.Game_state.Hit;
+                GetComponent<Flying_MOV>().state = Flying_MOV.Game_state.collided;
                 print("playing");
                 audioSource.Stop();
                 audioSource.PlayOneShot(finish);
