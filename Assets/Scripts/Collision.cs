@@ -1,56 +1,57 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
 using UnityEngine.SceneManagement;
-
 
 public class Collision : MonoBehaviour
 {
-    [SerializeField] int waittime=1;
-    [Header("Audio")]
-    public AudioSource audioSource;
-    public AudioClip boom;
-    public AudioClip finish;
-    private void OnCollisionEnter(UnityEngine.Collision collision)
+    public void OnCollisionEnter(UnityEngine.Collision collision)
     {
-        if (GetComponent<Flying_MOV>().state == Flying_MOV.Game_state.collided)
-        {
-            return;
-        }
+        if (GetComponent<Flying_MOV>().Impact_audiosource.isPlaying) { return; }
         switch (collision.collider.tag)
         {
             case "Hell":
-                Debug.Log("Hell");
-                GetComponent<Flying_MOV>().state = Flying_MOV.Game_state.collided;
-                audioSource.Stop();
-                audioSource.PlayOneShot(boom);
-                Invoke("Return_Scene", waittime);
+                Debug.Log("Dead");
+                Death_Sequence();
                 break;
             case "Pad":
                 Debug.Log("Safe");
-                GetComponent<Flying_MOV>().state = Flying_MOV.Game_state.collided;
-                print("playing");
-                audioSource.Stop();
-                audioSource.PlayOneShot(finish);
-                Invoke("Next_Scene", waittime);
+                Fin_Sequence();
                 break;
         }
 
+
     }
 
-    public void Next_Scene()
+    private void Death_Sequence()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        GetComponent<Flying_MOV>().state = Flying_MOV.Game_state.Hit;
+        GetComponent<Flying_MOV>().expoltion.Play();
+        GetComponent<Flying_MOV>().Impact_audiosource.Stop();
+        GetComponent<Flying_MOV>().Impact_audiosource.PlayOneShot(GetComponent<Flying_MOV>().boom);
+        Invoke("Scene_changer", GetComponent<Flying_MOV>().waittime);
     }
 
-    public void Return_Scene()
+    private void Fin_Sequence()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        GetComponent<Flying_MOV>().state = Flying_MOV.Game_state.Finish;
+        GetComponent<Flying_MOV>().confetti.Play();
+        GetComponent<Flying_MOV>().Impact_audiosource.Stop();
+        GetComponent<Flying_MOV>().Impact_audiosource.PlayOneShot(GetComponent<Flying_MOV>().finish);
+        Invoke("Scene_changer", GetComponent<Flying_MOV>().waittime);
     }
-
-    private void Update()
+    private void Scene_changer()
     {
-        if (Input.GetKey(KeyCode.R))
+
+        if (GetComponent<Flying_MOV>().state == Flying_MOV.Game_state.Playing)
         {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        }
+        else
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
     }
+    
 }
+

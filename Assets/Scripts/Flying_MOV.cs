@@ -1,18 +1,19 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
 using UnityEngine;
 using UnityEngine.Animations;
 using UnityEngine.SceneManagement;
 
-
+[DisallowMultipleComponent]
 public class Flying_MOV : MonoBehaviour
 {
     [SerializeField] Rigidbody roc_rg;
-    [SerializeField] int waittime = 1;
+    public int waittime = 1;
     [Range(100f, 200f)]
     [SerializeField] float side_thrust = 100f;
-    [Range(10f, 100f)]
+    [Range(1000f, 2000f)]
     [SerializeField] float main_thrust = 100f;
     [Header("Audio")]
     public AudioClip boom;
@@ -21,30 +22,45 @@ public class Flying_MOV : MonoBehaviour
     public AudioSource Thrust_audiosource;
     public AudioSource Impact_audiosource;
     [Header("Particle System")]
-    [SerializeField] ParticleSystem engine_thrust;
-    [SerializeField] ParticleSystem expoltion;
-    [SerializeField] ParticleSystem confetti;
+    public ParticleSystem engine_thrust;
+    public ParticleSystem expoltion;
+    public ParticleSystem confetti;
+    [Header("Camera Movement")]
+    [SerializeField] Vector3 offset;
+    [SerializeField] Transform rocket;
 
-    public enum Game_state { Main_Menu, Playing, Finish, Pause, collided }
+    public enum Game_state { Main_Menu,Hit,Playing,Finish}
     public Game_state state = Game_state.Main_Menu;
-
     // Update is called once per frame
     private void Start()
     {
-        roc_rg = GetComponent<Rigidbody>();
+        state = Game_state.Playing;
 
     }
     void Update()
     {
-        Rotation();
-        Thrust();
-        Poss_Restric();
-        if (Input.GetKey(KeyCode.R))
+        if(state==Game_state.Playing)
         {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            Rotation();
+            Thrust();
+            Poss_Restric();
         }
-
+        if (state != Game_state.Playing)
+        {
+            Thrust_audiosource.Stop();
+            engine_thrust.Stop();
+        }
+        if (state == Game_state.Finish)
+        {
+            roc_rg.constraints = RigidbodyConstraints.FreezeAll;
+        }
+        Debug.LogError(GetComponent<Customize_Body>().color_code_body);
     }
+    void LateUpdate()
+    { 
+        transform.position = rocket.position + offset;
+    }
+
 
     private void Poss_Restric()
     {
@@ -55,7 +71,7 @@ public class Flying_MOV : MonoBehaviour
 
     private void Rotation()
     {
-        roc_rg.freezeRotation = true;
+        roc_rg.angularVelocity = Vector3.zero;
         if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
         {
             transform.Rotate(Vector3.forward * side_thrust * Time.deltaTime);
@@ -64,14 +80,13 @@ public class Flying_MOV : MonoBehaviour
         {
             transform.Rotate(-Vector3.forward * side_thrust * Time.deltaTime);
         }
-        roc_rg.freezeRotation = false;
     }
 
     private void Thrust()
     {
         if (Input.GetKey(KeyCode.Space))
         {
-            roc_rg.AddRelativeForce(Vector3.up * main_thrust);
+            roc_rg.AddRelativeForce(Vector3.up * main_thrust*Time.deltaTime);
             engine_thrust.Play();
             if (!Thrust_audiosource.isPlaying)
             {
@@ -83,45 +98,12 @@ public class Flying_MOV : MonoBehaviour
         else 
         {
             Thrust_audiosource.Stop();
-            print("rrrr");
             engine_thrust.Stop();
         }
 
 
     }
-    public void OnCollisionEnter(UnityEngine.Collision collision)
-    {
-        if (Impact_audiosource.isPlaying) { return; }
-        switch (collision.collider.tag)
-        {
-            case "Hell":
-                Death_Sequence();
-                break;
-            case "Pad":
-                Debug.Log("Safe");
-                Fin_Sequence();
-                break;
-        }
-        
 
-    }
 
-    private void Death_Sequence()
-    {
-        Debug.Log("Hell");
-        GetComponent<Flying_MOV>().state = Flying_MOV.Game_state.collided;
-        expoltion.Play();
-        Impact_audiosource.Stop();
-        Impact_audiosource.PlayOneShot(boom);
-    }
-
-    private void Fin_Sequence()
-    {
-        GetComponent<Flying_MOV>().state = Flying_MOV.Game_state.collided;
-        print("playing");
-        confetti.Play();
-        Impact_audiosource.Stop();
-        Impact_audiosource.PlayOneShot(finish);
-    }
 }
 
