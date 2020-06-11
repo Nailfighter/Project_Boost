@@ -25,9 +25,6 @@ public class Flying_MOV : MonoBehaviour
     public ParticleSystem engine_thrust;
     public ParticleSystem expoltion;
     public ParticleSystem confetti;
-    [Header("Camera Movement")]
-    [SerializeField] Vector3 offset;
-    [SerializeField] Transform rocket;
 
     public enum Game_state { Main_Menu,Hit,Playing,Finish}
     public Game_state state = Game_state.Main_Menu;
@@ -54,11 +51,6 @@ public class Flying_MOV : MonoBehaviour
         {
             roc_rg.constraints = RigidbodyConstraints.FreezeAll;
         }
-        Debug.LogError(GetComponent<Customize_Body>().color_code_body);
-    }
-    void LateUpdate()
-    { 
-        transform.position = rocket.position + offset;
     }
 
 

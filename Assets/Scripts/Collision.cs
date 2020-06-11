@@ -5,6 +5,8 @@ using UnityEngine.SceneManagement;
 
 public class Collision : MonoBehaviour
 {
+    public Vector3 offset;
+    public Transform camera;
     public void OnCollisionEnter(UnityEngine.Collision collision)
     {
         if (GetComponent<Flying_MOV>().Impact_audiosource.isPlaying) { return; }
@@ -43,7 +45,7 @@ public class Collision : MonoBehaviour
     private void Scene_changer()
     {
 
-        if (GetComponent<Flying_MOV>().state == Flying_MOV.Game_state.Playing)
+        if (GetComponent<Flying_MOV>().state == Flying_MOV.Game_state.Finish)
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
         }
@@ -51,6 +53,11 @@ public class Collision : MonoBehaviour
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
+    }
+
+    private void camera_mov()
+    {
+        camera.position = transform.position + offset;
     }
     
 }

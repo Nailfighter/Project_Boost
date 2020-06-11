@@ -16,11 +16,11 @@ public class Debug_key : MonoBehaviour
     }
     private void Debug_keys()
     {
-        if (Input.GetKey(KeyCode.R))
+        if (Input.GetKeyDown(KeyCode.R))
         {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            SceneManager.LoadScene(0);
         }
-        if (Input.GetKey(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Escape))
         {
             Debug.LogError("Working");
             is_pause_on = !is_pause_on;

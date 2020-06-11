@@ -3,10 +3,9 @@ using System.Collections;
 
 public class Customization_Booster : MonoBehaviour
 {
+    public Customization_Data color_data;
     public Material[] color;
     Renderer rend;
-    public int color_code_booster = 0;
-    public int color_code_body = 0;
     public void Update()
     {
         if (Input.GetKeyDown(KeyCode.Z))
@@ -15,17 +14,18 @@ public class Customization_Booster : MonoBehaviour
         }
         rend = GetComponent<Renderer>();
         rend.enabled = true;
-        rend.sharedMaterial = color[color_code_booster];
+        rend.sharedMaterial = color[color_data.color_code_booster];
+        
     
     }
     
 
     public void change_color()
     {
-        color_code_booster++;
-        if (color_code_booster >= 4)
+        color_data.color_code_booster++;
+        if (color_data.color_code_booster >= 4)
         {
-            color_code_booster = 0;
+            color_data.color_code_booster = 0;
         }
     }
 }
