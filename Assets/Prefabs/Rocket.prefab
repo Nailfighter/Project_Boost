@@ -932,8 +932,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8976281485270915972}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0.03, y: 0, z: 0}
+  m_LocalScale: {x: 1.8300613, y: 1.9616601, z: 1.7856}
   m_Children:
   - {fileID: 1175453741}
   - {fileID: 5454966107641385822}
@@ -1066,6 +1066,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   roc_rg: {fileID: -7099934624596913217}
+  M_camera: {fileID: 0}
+  offset: {x: 0, y: 20, z: -100}
   waittime: 2
   side_thrust: 170
   main_thrust: 1500
@@ -1186,8 +1188,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: daf38622a6375e246ab3a6ebdd391fcf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  offset: {x: 0, y: 2, z: -30}
-  camera: {fileID: 0}
 --- !u!1 &8976281485275523716
 GameObject:
   m_ObjectHideFlags: 0

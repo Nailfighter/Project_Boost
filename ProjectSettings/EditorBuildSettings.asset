@@ -6,9 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Scenes/The Begining.unity
+    guid: 816e1dca58514584aa5bb3ab3c7dc6a1
+  - enabled: 1
     path: Assets/Scenes/Trial GRound.unity
     guid: 9fc0d4010bbf28b4594072e72b8655ab
-  - enabled: 1
-    path: Assets/Scenes/Trial GRound 1.unity
-    guid: 5362b6319ad5aeb4d8826e27c66b83d4
   m_configObjects: {}

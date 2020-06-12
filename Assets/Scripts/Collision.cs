@@ -5,8 +5,6 @@ using UnityEngine.SceneManagement;
 
 public class Collision : MonoBehaviour
 {
-    public Vector3 offset;
-    public Transform camera;
     public void OnCollisionEnter(UnityEngine.Collision collision)
     {
         if (GetComponent<Flying_MOV>().Impact_audiosource.isPlaying) { return; }
@@ -55,10 +53,6 @@ public class Collision : MonoBehaviour
         }
     }
 
-    private void camera_mov()
-    {
-        camera.position = transform.position + offset;
-    }
     
 }
 
