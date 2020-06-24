@@ -10,9 +10,6 @@ using UnityEngine.SceneManagement;
 public class Flying_MOV : MonoBehaviour
 {
     [SerializeField] Rigidbody roc_rg;
-    [Header("Camera")]
-    [SerializeField] Transform M_camera;
-    [SerializeField] Vector3 offset = new Vector3();
     public int waittime = 1;
     [Range(100f, 200f)]
     [SerializeField] float side_thrust = 100f;
@@ -34,7 +31,7 @@ public class Flying_MOV : MonoBehaviour
     private void Start()
     {
         state = Game_state.Playing;
-        M_camera = FindObjectOfType<Camera>().transform;
+        
 
     }
     void Update()
@@ -55,10 +52,7 @@ public class Flying_MOV : MonoBehaviour
             roc_rg.constraints = RigidbodyConstraints.FreezeAll;
         }
     }
-    void LateUpdate()
-    {
-        M_camera.transform.position = new Vector3(transform.position.x, offset.y,offset.z);
-    }
+    
 
 
 

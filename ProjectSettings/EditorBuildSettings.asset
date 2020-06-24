@@ -6,9 +6,15 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Scenes/Trial GRound.unity
+    guid: 9fc0d4010bbf28b4594072e72b8655ab
+  - enabled: 1
     path: Assets/Scenes/The Begining.unity
     guid: 816e1dca58514584aa5bb3ab3c7dc6a1
   - enabled: 1
-    path: Assets/Scenes/Trial GRound.unity
-    guid: 9fc0d4010bbf28b4594072e72b8655ab
+    path: Assets/Scenes/Empty Void.unity
+    guid: e595067299733804399c2afb7e3ad83e
+  - enabled: 1
+    path: Assets/Scenes/Beneath the living.unity
+    guid: d14688f54225fcf49b2fe18a27a3dea1
   m_configObjects: {}

@@ -5,20 +5,25 @@ using UnityEngine.SceneManagement;
 
 public class Collision : MonoBehaviour
 {
+    [SerializeField] bool is_collision_on = true;
     public void OnCollisionEnter(UnityEngine.Collision collision)
     {
-        if (GetComponent<Flying_MOV>().Impact_audiosource.isPlaying) { return; }
-        switch (collision.collider.tag)
+        if (is_collision_on) 
         {
-            case "Hell":
-                Debug.Log("Dead");
-                Death_Sequence();
-                break;
-            case "Pad":
-                Debug.Log("Safe");
-                Fin_Sequence();
-                break;
+            if (GetComponent<Flying_MOV>().Impact_audiosource.isPlaying) { return; }
+            switch (collision.collider.tag)
+            {
+                case "Hell":
+                    Debug.Log("Dead");
+                    Death_Sequence();
+                    break;
+                case "Pad":
+                    Debug.Log("Safe");
+                    Fin_Sequence();
+                    break;
+            }
         }
+            
 
 
     }
