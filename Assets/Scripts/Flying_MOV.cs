@@ -28,6 +28,8 @@ public class Flying_MOV : MonoBehaviour
 
     public enum Game_state { Main_Menu,Hit,Playing,Finish}
     public Game_state state = Game_state.Main_Menu;
+    private bool is_headlight_on=false;
+    [SerializeField] GameObject headlight;
     private void Start()
     {
         state = Game_state.Playing;
@@ -36,7 +38,8 @@ public class Flying_MOV : MonoBehaviour
     }
     void Update()
     {
-        if(state==Game_state.Playing)
+        Spotlight_on();
+        if (state==Game_state.Playing)
         {
             Rotation();
             Thrust();
@@ -53,7 +56,22 @@ public class Flying_MOV : MonoBehaviour
         }
     }
     
-
+    public void Spotlight_on()
+    {
+        if (Input.GetKeyDown(KeyCode.CapsLock)) 
+        {
+            is_headlight_on =! is_headlight_on;
+            if (!is_headlight_on)
+            {
+                headlight.SetActive(false);
+            }
+            else
+            {
+                headlight.SetActive(true);
+            }
+        }
+        
+    }
 
 
     private void Poss_Restric()
