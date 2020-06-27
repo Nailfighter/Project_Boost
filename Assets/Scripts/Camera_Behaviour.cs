@@ -9,11 +9,20 @@ public class Camera_Behaviour : MonoBehaviour
     [SerializeField] Transform Rocket;
     [SerializeField] Vector3 offset = new Vector3();
     public bool y_axis_mov;
-    public void Start()
+    public void Update()
     {
+        if (Rocket.transform.position.y < 5f)
+        {
+            y_axis_mov = false;
+        }
+        else
+        {
+            y_axis_mov = true;
+        }
+        Camera_change();
     }
 
-    void LateUpdate()
+    void Camera_change()
     {
         if (y_axis_mov == false)
         {
