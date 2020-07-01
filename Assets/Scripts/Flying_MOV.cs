@@ -33,7 +33,8 @@ public class Flying_MOV : MonoBehaviour
     private void Start()
     {
         state = Game_state.Playing;
-        
+        Poss_Restric();
+
 
     }
     void Update()
@@ -43,7 +44,6 @@ public class Flying_MOV : MonoBehaviour
         {
             Rotation();
             Thrust();
-            Poss_Restric();
         }
         if (state != Game_state.Playing)
         {

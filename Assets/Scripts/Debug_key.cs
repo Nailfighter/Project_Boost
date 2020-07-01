@@ -22,7 +22,6 @@ public class Debug_key : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            Debug.LogError("Working");
             is_pause_on = !is_pause_on;
             if (is_pause_on == true)
             {
