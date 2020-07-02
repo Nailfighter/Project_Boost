@@ -1578,6 +1578,8 @@ MonoBehaviour:
   Rocket: {fileID: 1143792202}
   offset: {x: 0, y: 20, z: -100}
   y_axis_mov: 0
+  limit_active: 0
+  limit_y: 5
 --- !u!1 &228608827
 GameObject:
   m_ObjectHideFlags: 0
@@ -8922,6 +8924,10 @@ PrefabInstance:
       propertyPath: M_camera
       value: 
       objectReference: {fileID: 6188540643555787348}
+    - target: {fileID: 2166301266327360762, guid: b3e24d46490e3c146ba836ca6486f4e6, type: 3}
+      propertyPath: m_Intensity
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 8976281485270915972, guid: b3e24d46490e3c146ba836ca6486f4e6, type: 3}
       propertyPath: m_Name
       value: Rocket

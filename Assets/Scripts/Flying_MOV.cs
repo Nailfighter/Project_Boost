@@ -33,7 +33,7 @@ public class Flying_MOV : MonoBehaviour
     private void Start()
     {
         state = Game_state.Playing;
-        Poss_Restric();
+        
 
 
     }
@@ -73,13 +73,6 @@ public class Flying_MOV : MonoBehaviour
         
     }
 
-
-    private void Poss_Restric()
-    {
-        roc_rg.constraints = RigidbodyConstraints.FreezePositionZ;
-        roc_rg.constraints = RigidbodyConstraints.FreezeRotationX;
-        roc_rg.constraints = RigidbodyConstraints.FreezeRotationY;
-    }
 
     private void Rotation()
     {
