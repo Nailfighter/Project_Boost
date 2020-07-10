@@ -32,7 +32,10 @@ public class Flying_MOV : MonoBehaviour
     [SerializeField] GameObject headlight;
     private void Start()
     {
-        state = Game_state.Playing;
+        if(SceneManager.GetActiveScene().buildIndex != 0)
+        {
+            state = Game_state.Playing;
+        }
         
 
 

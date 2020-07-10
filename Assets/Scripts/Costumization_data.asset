@@ -14,3 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   color_code_booster: 0
   color_code_body: 0
+  time_ref: 0
+  nightmare_Mode: 0
+  no_of_material: 4

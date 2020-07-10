@@ -2,10 +2,18 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.XR.WSA.Input;
 
 public class Collision : MonoBehaviour
 {
     [SerializeField] bool is_collision_on = true;
+    public Customization_Data data;
+    public bool n_mode;
+    public void Start()
+    {
+        n_mode = data.nightmare_Mode;
+    
+    }
     public void OnCollisionEnter(UnityEngine.Collision collision)
     {
         if (is_collision_on) 
@@ -45,7 +53,7 @@ public class Collision : MonoBehaviour
         GetComponent<Flying_MOV>().Impact_audiosource.PlayOneShot(GetComponent<Flying_MOV>().finish);
         Invoke("Scene_changer", GetComponent<Flying_MOV>().waittime);
     }
-    private void Scene_changer()
+    public void Scene_changer()
     {
 
         if (GetComponent<Flying_MOV>().state == Flying_MOV.Game_state.Finish)
@@ -54,7 +62,15 @@ public class Collision : MonoBehaviour
         }
         else
         {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            if (!n_mode)
+            {
+                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            }
+            else
+            {
+                SceneManager.LoadScene(1);
+            }
+            
         }
     }
 

@@ -6,12 +6,9 @@ public class Customization_Booster : MonoBehaviour
     public Customization_Data color_data;
     public Material[] color;
     Renderer rend;
+    public bool n_mode;
     public void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Z))
-        {
-            change_color();
-        }
         rend = GetComponent<Renderer>();
         rend.enabled = true;
         rend.sharedMaterial = color[color_data.color_code_booster];
@@ -19,13 +16,8 @@ public class Customization_Booster : MonoBehaviour
     
     }
     
-
-    public void change_color()
+    public void mode()
     {
-        color_data.color_code_booster++;
-        if (color_data.color_code_booster >= 4)
-        {
-            color_data.color_code_booster = 0;
-        }
+        n_mode = color_data.nightmare_Mode;
     }
 }
