@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEditor.SceneManagement;
 using System.Xml.Serialization;
 using UnityEngine.SceneManagement;
 
@@ -56,5 +55,9 @@ public class UI_Behaviour : MonoBehaviour
         {
             data.color_code_booster = data.no_of_material-1;
         }
+    }
+    public void back()
+    {
+        SceneManager.LoadScene(0);
     }
 }

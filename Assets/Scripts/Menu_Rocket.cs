@@ -4,7 +4,8 @@ using System.Collections;
 public class Menu_Rocket : MonoBehaviour
 {
     [SerializeField] Rigidbody M_rocket;
-    [SerializeField][Range(0,50)] int force=40;
+    [SerializeField] float force=100;
+    [SerializeField] ParticleSystem thrust_p;
 
     void Update()
     {
@@ -12,7 +13,8 @@ public class Menu_Rocket : MonoBehaviour
     }
     void thrust()
     {
-        M_rocket.AddRelativeForce(Vector3.up * force);
+        M_rocket.AddRelativeForce(Vector3.up * force*Time.deltaTime);
         M_rocket.constraints = RigidbodyConstraints.FreezeRotation;
+        thrust_p.Play();
     }
 }

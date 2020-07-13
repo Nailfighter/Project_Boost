@@ -495,10 +495,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Rocket: {fileID: 1306088805}
-  offset: {x: 0, y: 260, z: -460}
+  offset: {x: 90, y: 260, z: -350}
   y_axis_mov: 1
-  limit_active: 0
-  limit_y: 5
+  x_axis_mov: 0
+  limit_active: 1
+  limit_y: 260
 --- !u!1 &58888368
 GameObject:
   m_ObjectHideFlags: 0
@@ -18559,7 +18560,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6188540643555787345}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 89, y: 260, z: -460}
+  m_LocalPosition: {x: 91, y: 260, z: -350}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 255178072}

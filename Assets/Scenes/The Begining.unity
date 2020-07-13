@@ -1578,6 +1578,7 @@ MonoBehaviour:
   Rocket: {fileID: 1143792202}
   offset: {x: 0, y: 20, z: -100}
   y_axis_mov: 0
+  x_axis_mov: 1
   limit_active: 0
   limit_y: 5
 --- !u!1 &228608827
@@ -7898,8 +7899,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1513757258}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -18.945, y: 0, z: 0}
-  m_LocalScale: {x: 0.73851, y: 0.73851, z: 0.73851}
+  m_LocalPosition: {x: -41.161, y: -7.1176, z: 1}
+  m_LocalScale: {x: 0.9726767, y: 0.9726767, z: 0.9726767}
   m_Children:
   - {fileID: 882931964}
   - {fileID: 1087120115}
@@ -11127,8 +11128,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 346e26b14ccff9f4b83d7978f964b5da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Time_UI: {fileID: 1665086034}
+  Time_UI: {fileID: 0}
   time_data: {fileID: 11400000, guid: 7a5c625132711174ea60d44cea8fe954, type: 2}
+  is_time_counting: 1
 --- !u!1 &6188540643555787345
 GameObject:
   m_ObjectHideFlags: 0
